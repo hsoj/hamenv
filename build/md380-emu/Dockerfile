@@ -1,4 +1,4 @@
-FROM dvswitch_base:0.0.0-base0
+FROM dvswitch:0.0.0
 RUN apt-get update \
     && apt-get install -y qemu \
     && apt-get clean
