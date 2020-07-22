@@ -6,8 +6,8 @@
 ; Note that the TX and RX ports are already reversed for MMDVM_Bridge <--> Quantar_Bridge
 [QUANTAR]
 logFilePath = /var/log/Quantar_Bridge.log
-Address = 127.0.0.1             ; Address to send IMBE TLV frames to (export)
-TXPort = 34103                  ; Port to send IMBE TLV frames to (export)
+Address = {{ANALOG_ADDR}}             ; Address to send IMBE TLV frames to (export)
+TXPort = 34100                  ; Port to send IMBE TLV frames to (export)
 RXPort = 34100                  ; Port to listen on (import)
 quantarPort = 1994              ; HDLC frames To/From the Quantar repeater
 logLevel = 2                    ; Show messages and above 0=No logging, 1=Debug, 2=Message, 3=Info, 4=Warning, 5=Error, 6=Fatal
@@ -16,19 +16,19 @@ debug = 0                       ; Debug 0 = off, 1 = on (adds lots of additional
 ; Configure the DMR Partner
 ; Audio format is AMBE 72 bit
 [DMR]
-Address = 172.16.0.250             ; Address to send AMBE TLV frames to (export)
+Address = {{ANALOG_ADDR}}             ; Address to send AMBE TLV frames to (export)
 TXPort = 31100                  ; Port to send AMBE TLV frames to (export)
-RXPort = 31103                  ; Port to listen on (import)
+RXPort = 31100                  ; Port to listen on (import)
 Slot = 2                        ; Export slot
 ExportTG = 0                    ; Which TG to export 
-TalkerAlias = N0CALL via DVSwitch
+TalkerAlias = N0CALL via HamEnv
 
 ; Configure the D-Star Partner
 ; Audio format is AMBE 48 bit (DSAMBE)
 [DSTAR]
 Address = 127.0.0.1             ; Address to send AMBE TLV frames to (export)
 TXPort = 32100                  ; Port to send AMBE TLV frames to (export)
-RXPort = 32103                  ; Port to listen on (import)
+RXPort = 32100                  ; Port to listen on (import)
 FallbackID = 1234567            ; In case we can not find a valid DMR id in the database, export this one
 ExportTG = 9                    ; Which TG to export
 Slot = 2                        ; Export slot
@@ -39,7 +39,7 @@ Message = Roger Nowhere Il. DVSWITCH
 [NXDN]
 Address = 127.0.0.1             ; Address to send AMBE TLV frames to (export)
 TXPort = 33100                  ; Port to send AMBE TLV frames to (export)
-RXPort = 33103                  ; Port to listen on (import)
+RXPort = 33100                  ; Port to listen on (import)
 FallbackID = 1234567            ; In case we can not find a valid DMR id in the database, export this one
 NXDNFallbackID  = 12345         ; Use this ID when the input DMR ID is not found in the database
 Translate = 1234=4321           ; Translate NXDN TG < -- > DMR TG (bidirectional)
@@ -50,7 +50,7 @@ Slot = 2                        ; Export slot
 [P25]
 Address = 127.0.0.1             ; Address to send AMBE TLV frames to (export)
 TXPort = 34100                  ; Port to send AMBE TLV frames to (export)
-RXPort = 34103                  ; Port to listen on (import)
+RXPort = 34100                  ; Port to listen on (import)
 Slot = 2                        ; Export slot
 
 ; Configure the Yaesu Fusion Partner
@@ -59,7 +59,7 @@ Slot = 2                        ; Export slot
 [YSF]
 Address = 127.0.0.1             ; Address to send AMBE TLV frames to (export)
 TXPort = 35100                  ; Port to send AMBE TLV frames to (export)
-RXPort = 35103                  ; Port to listen on (import)
+RXPort = 35100                  ; Port to listen on (import)
 TXWidePort = 35105		; Port to send IMBE TLV frames to for YSFw (export)
 FallbackID = 1234567            ; In case we can not find a valid DMR id in the database, export this one
 ExportTG = 1234                 ; Which TG to export
