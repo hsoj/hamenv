@@ -32,4 +32,5 @@ then
     echo "Done"
 fi
 
-${PROGRAM_DIR}/Analog_Bridge ${CONFIG}
+cd ${PROGRAM_DIR}
+./Analog_Bridge ${CONFIG}
