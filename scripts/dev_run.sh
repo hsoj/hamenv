@@ -36,7 +36,10 @@ function container_running() {
     name="${1}"
     version="${2}"
     check=$(docker ps -f name=${name} | tail -n +2 | awk '{print $2}' | awk -F\: '{print $2}')
-    echo "${check}"
+    if [ "${check}" == "${version}" ]
+    then
+        echo "${version}"
+    fi
 }
 
 # TODO: Put the following into Ansible.
@@ -50,6 +53,7 @@ md380_version=${MD380_VERSION:-$(cat "${md380_path}/VERSION")}
 if [ -z $(container_running "${md380_name}" "${md380_version}") ]
 then
     docker stop ${md380_name}
+    docker rm ${md380_name}
     docker run -d --name ${md380_name} ${md380_image}:${md380_version}
 fi
 
@@ -62,6 +66,7 @@ mmdvm_version=${MMDVM_VERSION:-$(cat "${mmdvm_path}/VERSION")}
 if [ -z $(container_running "${mmdvm_name}" "${mmdvm_version}") ]
 then
     docker stop ${mmdvm_name}
+    docker rm ${mmdvm_name}
     docker run -d --name ${mmdvm_name} \
         -e CALLSIGN=${CALLSIGN} \
         -e DMR_ID=${DMR_ID} \
@@ -78,6 +83,7 @@ analog_version=${ANALOG_VERSION:-$(cat "${analog_path}/VERSION")}
 if [ -z $(container_running "${analog_name}" "${analog_version}") ]
 then
     docker stop ${analog_name}
+    docker rm ${analog_name}
     docker run -d --name ${analog_name} \
         -e DMR_ID=${DMR_ID} \
         -e ANALOG_ADDR=${ANALOG_ADDR} \
