@@ -13,7 +13,7 @@ include = dvsm.macro
 
 ; General Section describes settings for Analog_Bridge itself.
 [GENERAL]
-logLevel = 2                            ; Show messages and above 0=No logging, 1=Debug, 2=Message, 3=Info, 4=Warning, 5=Error, 6=Fatal
+logLevel = 1                            ; Show messages and above 0=No logging, 1=Debug, 2=Message, 3=Info, 4=Warning, 5=Error, 6=Fatal
 
 ; Metadata management
 exportMetadata = true                   ; Export metadata to USRP partner (transcode setups require this)
@@ -27,8 +27,8 @@ emulatorAddress = {{EMULATOR_ADDR}}:{{EMULATOR_PORT}}        ; IP address and po
 
 ; Information for xx_Bridge (Where xx is MMDVM, Quantar, HB, IPSC)
 [AMBE_AUDIO]
-address = 0.0.0.0                     ; IP address of xx_Bridge
-txPort = 31103                          ; Transmit TLV frames to partner on this port
+address = {{MMDVM_ADDR}}                ; IP address of xx_Bridge
+txPort = 31100                          ; Transmit TLV frames to partner on this port
 rxPort = 31100                          ; Listen for TLV frames from partner on this port
 ambeMode = DMR                          ; DMR, DMR_IPSC, DSTAR, NXDN, P25, YSFN, YSFW (encode PCM to this format)
 minTxTimeMS = 2500                      ; Minimum time in MS for hang delay (0-10000)
@@ -49,9 +49,9 @@ colorCode = 1                           ; Color Code to assign DMR frames
 ;   When Transcoding, make two ini files and set txPort equal to the other instance rxPort (crossover).  Launch
 ;   each instance with its own ini file.
 [USRP]
-address = 127.0.0.1                     ; IP address of USRP partner (Allstar/Asterisk or another Analog_Bridge)
-txPort = 32001                          ; Transmit USRP frames on this port
-rxPort = 34001                          ; Listen for USRP frames on this port
+address = {{ANALOG_ADDR}}                     ; IP address of USRP partner (Allstar/Asterisk or another Analog_Bridge)
+txPort = 50111                          ; Transmit USRP frames on this port
+rxPort = 50111                          ; Listen for USRP frames on this port
 usrpAudio = AUDIO_UNITY                 ; Digital -> Analog (AUDIO_UNITY, AUDIO_USE_GAIN, AUDIO_USE_AGC)
 usrpGain = 1.10                         ; Gain factor when usrpAudio = AUDIO_USE_GAIN (0.0 to 5.0) (1.0 = AUDIO_UNITY)
 usrpAgc = -20,10,100                    ; Set the agc threshold (db), slope (db) and decay (ms)
@@ -83,9 +83,9 @@ tlvGain = 0.35                          ; Gain factor when tlvAudio = AUDIO_USE_
 ;   Use bottom server/port and serial = true if using the DV3000u (thumbdv)
 ;   Did you run AMBETest4.py before using this?
 [DV3000]
-address = 127.0.0.1                   ; IP address of AMBEServer
+address = {{ANALOG_ADDR}}                   ; IP address of AMBEServer
 rxPort = 2460                         ; Port of AMBEServer
 ; address = /dev/ttyUSB0              ; Device of DV3000U on this machine
 ; baud = 460800                       ; Baud rate of the dongle (230400 or 460800)
-; serial = true                       ; Use serial=true for direct connect or serial=false for AMBEServer
+; serial = false                       ; Use serial=true for direct connect or serial=false for AMBEServer
 

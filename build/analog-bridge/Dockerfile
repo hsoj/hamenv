@@ -1,5 +1,10 @@
 FROM dvswitch:0.0.0
 COPY run.sh /
 COPY Analog_Bridge.ini.tmpl /
-EXPOSE 31100
+EXPOSE 2460/tcp
+EXPOSE 2460/udp
+EXPOSE 31100/tcp
+EXPOSE 31100/udp
+EXPOSE 34001/tcp
+EXPOSE 34001/udp
 CMD ["/run.sh"]
