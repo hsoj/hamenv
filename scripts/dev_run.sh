@@ -54,7 +54,9 @@ if [ -z $(container_running "${md380_name}" "${md380_version}") ]
 then
     docker stop ${md380_name}
     docker rm ${md380_name}
-    docker run -d --name ${md380_name} ${md380_image}:${md380_version}
+    docker run -d --name ${md380_name} \
+        -p 2470:2470/udp \
+        ${md380_image}:${md380_version}
 fi
 
 # Ensure that the MMDVM bridge container is running
@@ -68,6 +70,8 @@ then
     docker stop ${mmdvm_name}
     docker rm ${mmdvm_name}
     docker run -d --name ${mmdvm_name} \
+        -p 31103:31103/udp \
+        -p 62032:62032/tcp -p 62032:62032/udp \ # Not sure which protocol
         -e CALLSIGN=${CALLSIGN} \
         -e DMR_ID=${DMR_ID} \
         -e ANALOG_ADDR=${ANALOG_ADDR} \
@@ -85,6 +89,8 @@ then
     docker stop ${analog_name}
     docker rm ${analog_name}
     docker run -d --name ${analog_name} \
+        -p 31100:31100/udp \
+        -p 50111:50111/udp \
         -e DMR_ID=${DMR_ID} \
         -e ANALOG_ADDR=${ANALOG_ADDR} \
         -e EMULATOR_ADDR=${EMULATOR_ADDR} \
