@@ -17,6 +17,8 @@ RUN apt-get update \
     && apt-get clean
 # TODO: Sniff the traffic to determine which protocol is being used for this 
 # communication and update the EXPOSE configuration to the correct on.
-EXPOSE 31103/tcp
+# EXPOSE 31103/tcp
 EXPOSE 31103/udp
+EXPOSE 62032/tcp
+EXPOSE 62032/udp
 CMD ["/run.sh"]
