@@ -33,6 +33,9 @@ then
     # Configure DVSwitch
     cp ${DVSWITCH_INI}.tmpl ${DVSWITCH_INI}
     sed -i "s/{{ANALOG_ADDR}}/${ANALOG_ADDR}/g" ${DVSWITCH_INI}
+    # TODO: Figure out where this hardcoded value is getting set and determine 
+    # the best way to avoid having to create this symlink
+    ln -s ${DVSWITCH_INI} /opt/MMDVM_Bridge/DVSwitch.ini
     echo "Done"
 fi
 

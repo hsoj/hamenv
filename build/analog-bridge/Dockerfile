@@ -16,7 +16,6 @@ RUN apt-get update \
     && mv /src/${analog_name}/bin/${analog_name}.${platform} /${analog_name} \
     && mv /src/${mmdvm_name}/dvswitch.sh / \
     && mkdir -p /opt/${mmdvm_Name} \
-    && ln -s /DVSwitch.ini /opt/${mmdvm_name}/DVSwitch.ini \
     && apt-get purge -y ${tmp_pkgs} \
     && apt-get autoremove -y
 # TODO: Sniff the traffic to determine which protocols are used for each of 
