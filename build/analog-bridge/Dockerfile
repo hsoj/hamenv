@@ -20,12 +20,12 @@ RUN apt-get update \
     && apt-get autoremove -y
 # TODO: Sniff the traffic to determine which protocols are used for each of 
 # these ports and modify the expose configs to reflect
-EXPOSE 2460/tcp
-EXPOSE 2460/udp
-EXPOSE 31100/tcp
+# EXPOSE 2460/tcp
+# EXPOSE 2460/udp
+# EXPOSE 31100/tcp
 EXPOSE 31100/udp
-EXPOSE 34001/tcp
-EXPOSE 34001/udp
-EXPOSE 50111/tcp
+# EXPOSE 34001/tcp
+# EXPOSE 34001/udp
+# EXPOSE 50111/tcp
 EXPOSE 50111/udp
 CMD ["/run.sh"]
