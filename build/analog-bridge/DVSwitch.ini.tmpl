@@ -7,7 +7,7 @@
 [QUANTAR]
 logFilePath = /var/log/Quantar_Bridge.log
 Address = 127.0.0.1             ; Address to send IMBE TLV frames to (export)
-TXPort = 34103                  ; Port to send IMBE TLV frames to (export)
+TXPort = 34103                  ; Port to send IMBE TLV frames to (export) 
 RXPort = 34100                  ; Port to listen on (import)
 quantarPort = 1994              ; HDLC frames To/From the Quantar repeater
 logLevel = 2                    ; Show messages and above 0=No logging, 1=Debug, 2=Message, 3=Info, 4=Warning, 5=Error, 6=Fatal
@@ -17,8 +17,8 @@ debug = 0                       ; Debug 0 = off, 1 = on (adds lots of additional
 ; Audio format is AMBE 72 bit
 [DMR]
 Address = {{ANALOG_ADDR}}             ; Address to send AMBE TLV frames to (export)
-TXPort = 31100                  ; Port to send AMBE TLV frames to (export)
-RXPort = 31103                  ; Port to listen on (import)
+TXPort = 31100                  ; Port to send AMBE TLV frames to (export) (NOTE: REALLY this is the RX port for this config...)
+RXPort = 31103                  ; Port to send on (import <-- lies)
 Slot = 2                        ; Export slot
 ExportTG = 0                    ; Which TG to export 
 TalkerAlias = N0CALL via hsoj/hamenv
