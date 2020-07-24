@@ -4,6 +4,7 @@
 
 PROGRAM_DIR="/opt/Analog_Bridge"
 CONFIG="/Analog_Bridge.ini"
+DVSWITCH_INI="/DVSwitch.ini"
 EMULATOR_ADDR=${EMULATOR_ADDR:-127.0.0.1}
 EMULATOR_PORT=${EMULATOR_PORT:-2470}
 ANALOG_ADDR=${ANALOG_ADDR:-127.0.0.1}
@@ -29,8 +30,12 @@ then
     sed -i "s/{{MMDVM_ADDR}}/${MMDVM_ADDR}/g" ${CONFIG}
     sed -i "s/{{DMR_ID}}/${DMR_ID}/g" ${CONFIG}
     sed -i "s/{{SSID}}/${DMR_ID}${SSID}/g" ${CONFIG}
+    # Configure DVSwitch
+    cp ${DVSWITCH_INI}.tmpl ${DVSWITCH_INI}
+    sed -i "s/{{ANALOG_ADDR}}/${ANALOG_ADDR}/g" ${DVSWITCH_INI}
     echo "Done"
 fi
 
-cd ${PROGRAM_DIR}
+export DVSWITCH_INI
+
 ./Analog_Bridge ${CONFIG}
