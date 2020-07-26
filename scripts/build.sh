@@ -4,7 +4,6 @@
 
 BUILD_DIR="build"
 IMAGES=(
-    "dvswitch"
     "md380-emu"
     "analog-bridge"
     "mmdvm-bridge"
