@@ -23,13 +23,13 @@ subscriberFile = /subscriber_ids.csv   ; DMR ID to callsign lookup data
 ; General vocoder setup information
 decoderFallBack = true                  ; Allow software AMBE decoding if a hardware decoder is not found
 useEmulator = true                     ; Use the MD380 AMBE emulator for AMBE72 (DMR/YSFN/NXDN)
-emulatorAddress = {{EMULATOR_HOST}}:{{EMULATOR_OP_PORT}}        ; IP address and port of the md380 server
+emulatorAddress = {{EMULATOR_HOST}}:{{EMULATOR_PORT}}        ; IP address and port of the md380 server
 
 ; Information for xx_Bridge (Where xx is MMDVM, Quantar, HB, IPSC)
 [AMBE_AUDIO]
 address = {{MMDVM_HOST}}                ; IP address of xx_Bridge
-txPort = {{MMDVM_OP_PORT}}                          ; Transmit TLV frames to partner on this port
-rxPort = {{ANALOG_OP_PORT}}                          ; Listen for TLV frames from partner on this port
+txPort = {{MMDVM_PORT}}                          ; Transmit TLV frames to partner on this port
+rxPort = {{ANALOG_PORT}}                          ; Listen for TLV frames from partner on this port
 ambeMode = DMR                          ; DMR, DMR_IPSC, DSTAR, NXDN, P25, YSFN, YSFW (encode PCM to this format)
 minTxTimeMS = 2500                      ; Minimum time in MS for hang delay (0-10000)
 
@@ -50,8 +50,8 @@ colorCode = 1                           ; Color Code to assign DMR frames
 ;   each instance with its own ini file.
 [USRP]
 address = {{ANALOG_HOST}}                     ; IP address of USRP partner (Allstar/Asterisk or another Analog_Bridge)
-txPort = {{MOBILE_CLIENT_OP_PORT}}                          ; Transmit USRP frames on this port
-rxPort = {{MOBILE_CLIENT_OP_PORT}}                          ; Listen for USRP frames on this port
+txPort = {{MOBILE_CLIENT_PORT}}                          ; Transmit USRP frames on this port
+rxPort = {{MOBILE_CLIENT_PORT}}                          ; Listen for USRP frames on this port
 usrpAudio = AUDIO_UNITY                 ; Digital -> Analog (AUDIO_UNITY, AUDIO_USE_GAIN, AUDIO_USE_AGC)
 usrpGain = 1.10                         ; Gain factor when usrpAudio = AUDIO_USE_GAIN (0.0 to 5.0) (1.0 = AUDIO_UNITY)
 usrpAgc = -20,10,100                    ; Set the agc threshold (db), slope (db) and decay (ms)

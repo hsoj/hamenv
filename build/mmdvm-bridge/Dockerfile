@@ -15,8 +15,4 @@ RUN apt-get update \
     && apt-get purge -y ${tmp_pkgs} \
     && apt-get autoremove -y \
     && apt-get clean
-EXPOSE 31103/udp
-# TODO: Determine if these ports need to be exposed
-EXPOSE 62032/tcp
-EXPOSE 62032/udp
 CMD ["bash", "-c", "/run.sh"]

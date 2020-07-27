@@ -18,6 +18,4 @@ RUN apt-get update \
     && mkdir -p /opt/${mmdvm_Name} \
     && apt-get purge -y ${tmp_pkgs} \
     && apt-get autoremove -y
-EXPOSE 31100/udp
-EXPOSE 50111/udp
 CMD ["bash", "-c", "/run.sh"]
