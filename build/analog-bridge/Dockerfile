@@ -18,14 +18,6 @@ RUN apt-get update \
     && mkdir -p /opt/${mmdvm_Name} \
     && apt-get purge -y ${tmp_pkgs} \
     && apt-get autoremove -y
-# TODO: Sniff the traffic to determine which protocols are used for each of 
-# these ports and modify the expose configs to reflect
-# EXPOSE 2460/tcp
-# EXPOSE 2460/udp
-# EXPOSE 31100/tcp
 EXPOSE 31100/udp
-# EXPOSE 34001/tcp
-# EXPOSE 34001/udp
-# EXPOSE 50111/tcp
 EXPOSE 50111/udp
 CMD ["bash", "-c", "/run.sh"]
