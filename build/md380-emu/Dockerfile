@@ -20,6 +20,4 @@ COPY --from=builder "/dist/md380-emu" /
 RUN apt-get update \
     && apt-get install -y qemu-user-static \
     && apt-get clean
-EXPOSE 2470/tcp
-EXPOSE 2470/udp
 CMD ["bash", "-c", "/run.sh"]

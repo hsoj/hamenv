@@ -16,7 +16,7 @@ debug = 0                       ; Debug 0 = off, 1 = on (adds lots of additional
 ; Configure the DMR Partner
 ; Audio format is AMBE 72 bit
 [DMR]
-Address = {{ANALOG_ADDR}}             ; Address to send AMBE TLV frames to (export)
+Address = {{ANALOG_HOST}}             ; Address to send AMBE TLV frames to (export)
 TXPort = {{ANALOG_PORT}}                  ; Port to send AMBE TLV frames to (export) (NOTE: REALLY this is the RX port for this config...)
 RXPort = {{MMDVM_PORT}}                  ; Port to send on (import <-- lies)
 Slot = 2                        ; Export slot
