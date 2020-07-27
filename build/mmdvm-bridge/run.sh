@@ -2,8 +2,9 @@
 #
 #
 
-ANALOG_ADDR=${ANALOG_ADDR:-127.0.0.1}
-ANALOG_PORT=${ANALOG_PORT:-31100}
+ANALOG_HOST=${ANALOG_HOST:-127.0.0.1}
+ANALOG_OP_PORT=${ANALOG_OP_PORT:-31100}
+MMDVM_OP_PORT=${MMDVM_OP_PORT:-32000}
 BM_ADDR=${BM_ADDR:-3101.repeater.net}
 BM_PORT=${BM_PORT:-62031}
 BM_LOCAL_PORT=${BM_LOCAL_PORT:-62032}
@@ -57,10 +58,10 @@ then
     # directory that the bridge binary is executed from and has a hard coded
     # name.
     cp ${DVSWITCH_INI}.tmpl ${DVSWITCH_INI}
-    sed -i "s/{{ANALOG_ADDR}}/${ANALOG_ADDR}/g" ${DVSWITCH_INI}
-    sed -i "s/{{ANALOG_PORT}}/${ANALOG_PORT}/g" ${DVSWITCH_INI}
+    sed -i "s/{{ANALOG_HOST}}/${ANALOG_HOST}/g" ${DVSWITCH_INI}
+    sed -i "s/{{ANALOG_OP_PORT}}/${ANALOG_OP_PORT}/g" ${DVSWITCH_INI}
     sed -i "s/{{CALLSIGN}}/${CALLSIGN}/g" ${DVSWITCH_INI}
-    sed -i "s/{{MMDVM_PORT}}/${MMDVM_PORT}/g" ${DVSWITCH_INI}
+    sed -i "s/{{MMDVM_OP_PORT}}/${MMDVM_OP_PORT}/g" ${DVSWITCH_INI}
 fi
 
 /MMDVM_Bridge ${MMDVM_INI}
