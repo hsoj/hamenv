@@ -3,7 +3,11 @@
 #
 
 BUILD_PATH="build"
-IMAGES=$(ls "${BUILD_PATH}")
+IMAGES=(
+    "md380-emu"
+    "mmdvm-bridge"
+    "analog-bridge"
+)
 HOST=${HOST:-$(env | grep DOCKER_HOST | awk -F\: '{printf "%s\n", $2}' | sed "s|//||g")}
 ANALOG_ADDR=${ANALOG_ADDR:-${HOST}}
 EMULATOR_ADDR=${EMULATOR_ADDR:-${HOST}}
@@ -71,7 +75,7 @@ then
     docker rm ${mmdvm_name}
     docker run -d --name ${mmdvm_name} \
         -p 31103:31103/udp \
-        -p 62032:62032/tcp -p 62032:62032/udp \ # Not sure which protocol
+        -p 62032:62032/tcp -p 62032:62032/udp \
         -e CALLSIGN=${CALLSIGN} \
         -e DMR_ID=${DMR_ID} \
         -e ANALOG_ADDR=${ANALOG_ADDR} \
@@ -90,7 +94,7 @@ then
     docker rm ${analog_name}
     docker run -d --name ${analog_name} \
         -p 31100:31100/udp \
-        -p 50111:50111/udp \
+        -p 51100:51100/udp \
         -e DMR_ID=${DMR_ID} \
         -e ANALOG_ADDR=${ANALOG_ADDR} \
         -e EMULATOR_ADDR=${EMULATOR_ADDR} \

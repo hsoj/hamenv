@@ -17,11 +17,11 @@ debug = 0                       ; Debug 0 = off, 1 = on (adds lots of additional
 ; Audio format is AMBE 72 bit
 [DMR]
 Address = {{ANALOG_ADDR}}             ; Address to send AMBE TLV frames to (export)
-TXPort = 31100                  ; Port to send AMBE TLV frames to (export) (NOTE: REALLY this is the RX port for this config...)
-RXPort = 31103                  ; Port to send on (import <-- lies)
+TXPort = {{ANALOG_PORT}}                  ; Port to send AMBE TLV frames to (export) (NOTE: REALLY this is the RX port for this config...)
+RXPort = {{MMDVM_PORT}}                  ; Port to send on (import <-- lies)
 Slot = 2                        ; Export slot
 ExportTG = 0                    ; Which TG to export 
-TalkerAlias = N0CALL via hsoj/hamenv
+TalkerAlias = {{CALLSIGN}} via hsoj/hamenv
 
 ; Configure the D-Star Partner
 ; Audio format is AMBE 48 bit (DSAMBE)
