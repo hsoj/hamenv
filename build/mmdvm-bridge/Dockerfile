@@ -21,4 +21,4 @@ RUN apt-get update \
 EXPOSE 31103/udp
 EXPOSE 62032/tcp
 EXPOSE 62032/udp
-CMD ["/run.sh"]
+CMD ["bash", "-c", "/run.sh"]
