@@ -5,12 +5,14 @@ stream sent to the exposed port (Default: 2047).
 Every deployment will need at least one emulator container running.
 
 ## Examples
-Building:
+### Building
+*NOTE* Building should be done from the root directory of the repository.
+
 ```bash
 docker build -t md380-emu:local build/md380-emu
 ```
 
-Running:
+### Running
 ```bash
 docker run -d -p 2047:2047/udp md380-emu:latest
 ```

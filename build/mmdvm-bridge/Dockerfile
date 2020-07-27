@@ -15,10 +15,8 @@ RUN apt-get update \
     && apt-get purge -y ${tmp_pkgs} \
     && apt-get autoremove -y \
     && apt-get clean
-# TODO: Sniff the traffic to determine which protocol is being used for this 
-# communication and update the EXPOSE configuration to the correct on.
-# EXPOSE 31103/tcp
 EXPOSE 31103/udp
+# TODO: Determine if these ports need to be exposed
 EXPOSE 62032/tcp
 EXPOSE 62032/udp
 CMD ["bash", "-c", "/run.sh"]
