@@ -3,11 +3,7 @@
 #
 
 BUILD_DIR="build"
-IMAGES=(
-    "md380-emu"
-    "analog-bridge"
-    "mmdvm-bridge"
-)
+IMAGES=$(ls ${BUILD_DIR})
 
 function get_images() {
     images=$(docker images | awk '{printf "%s:%s\n", $1, $2}' | tail -n +2)

@@ -22,4 +22,4 @@ RUN apt-get update \
     && apt-get clean
 EXPOSE 2470/tcp
 EXPOSE 2470/udp
-CMD ["/run.sh"]
+CMD ["bash", "-c", "/run.sh"]

@@ -28,4 +28,4 @@ EXPOSE 31100/udp
 # EXPOSE 34001/udp
 # EXPOSE 50111/tcp
 EXPOSE 50111/udp
-CMD ["/run.sh"]
+CMD ["bash", "-c", "/run.sh"]
