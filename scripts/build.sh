@@ -1,29 +1,60 @@
 #!/usr/bin/env bash
 #
-#
 
-BUILD_DIR="build"
-IMAGES=$(ls ${BUILD_DIR})
+. "${BASH_SOURCE%/*}/common.sh"
 
-function get_images() {
-    images=$(docker images | awk '{printf "%s:%s\n", $1, $2}' | tail -n +2)
-    echo "${images[@]}"
+FORCE=${FORCE:-0}
+TARGET=${TARGET:-""}
+
+# print_help Prints out the help message and exits 0
+function print_help() {
+    cat <<EOF
+${0} [-h] [-f] [-t target_image]
+
+    -h      Prints this message
+    -f      Forces a rebuild of the image(s)
+    -t      Target a specific container image to be built
+EOF
+    exit 1
 }
 
-function image_version_exists() {
-    image_name="${1}"
-    image_version="${2}"
-    install_chk=$(get_images | grep "${image_name}" | grep "${image_version}")
-    echo "${install_chk}"
-}
-
-for i in ${IMAGES[@]}
+# Get the options passed if any
+while (($#))
 do
-    build_path="${BUILD_DIR}/${i}"
-    version=$(cat "${build_path}/VERSION")
-    image_exists=$(image_version_exists "${i}" "${version}")
-    if [ -z "${image_exists}" ]
+    case "${1}" in
+        -f)
+            FORCE=1
+        ;;
+        -t)
+            TARGET=${2}
+            shift
+        ;;
+        -h)
+            print_help
+        ;;
+    esac
+    shift
+done
+
+# If there was not a single target provided, get all of the available images 
+# that exist within the BUILD_DIR and make that the target.
+if [ -z "${TARGET}" ]
+then
+    TARGET=$(ls "${BUILD_DIR}")
+fi
+
+# Iterate over the target
+for image_name in ${TARGET[@]}
+do
+    image_dir="${BUILD_DIR}/${image_name}"
+    image_version=$(get_image_version ${image_name})
+    image_exists=$(docker_image_version_exists ${image_name} ${image_version})
+    if [[ ${FORCE} -eq 1 ]] || [[ -z ${image_exists} ]]
     then
-        docker build -t ${i}:${version} "${build_path}"
+        # If there is a Dockerfile assume the build is for a docker image
+        if [ -f ${image_dir}/Dockerfile ]
+        then
+            docker_build_image ${image_name} ${image_version}
+        fi
     fi
 done
