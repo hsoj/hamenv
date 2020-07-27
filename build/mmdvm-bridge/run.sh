@@ -2,15 +2,21 @@
 #
 #
 
+ANALOG_ADDR=${ANALOG_ADDR:-127.0.0.1}
+ANALOG_PORT=${ANALOG_PORT:-31100}
+BM_ADDR=${BM_ADDR:-3101.repeater.net}
+BM_PORT=${BM_PORT:-62031}
+BM_LOCAL_PORT=${BM_LOCAL_PORT:-62032}
+BM_PASSWD=${BM_PASSWD:-passw0rd}
 REPEATER_ID=${REPEATER_ID:-00}
 LATITUDE=${LATITUDE:-0}
 LONGITUDE=${LONGITUDE:-0}
 LOCATION=${LOCATION:-UNKNOWN}
 DESCRIPTION=${DESCRIPTION:-hamenv Bridge}
 URL=${URL:-"https://qrz.com/db/${CALLSIGN}"}
-BM_ADDR=${BM_ADDR:-3101.repeater.net}
-BM_PASSWD=${BM_PASSWD:-passw0rd}
-ANALOG_ADDR=${ANALOG_ADDR:-127.0.0.1}
+
+
+MMDVM_PORT=${MMDVM_PORT:-31101}
 
 export DVSWITCH_INI=${DVSWITCH_INI:-/DVSwitch.ini}
 export MMDVM_DIR=${MMDVM_DIR:-/}
@@ -43,6 +49,8 @@ then
     # URL
     sed -i "s|{{URL}}|${URL}|g" ${MMDVM_INI}
     sed -i "s/{{BM_ADDR}}/${BM_ADDR}/g" ${MMDVM_INI}
+    sed -i "s/{{BM_PORT}}/${BM_PORT}/g" ${MMDVM_INI}
+    sed -i "s/{{BM_LOCAL_PORT}}/${BM_LOCAL_PORT}/g" ${MMDVM_INI}
     sed -i "s/{{BM_PASSWD}}/${BM_PASSWD}/g" ${MMDVM_INI}
     # TODO: Modify this so that it doesn't just use the blanket config.
     # TODO: Make the a variable?  It's not like it can be modified from the 
@@ -50,6 +58,9 @@ then
     # name.
     cp ${DVSWITCH_INI}.tmpl ${DVSWITCH_INI}
     sed -i "s/{{ANALOG_ADDR}}/${ANALOG_ADDR}/g" ${DVSWITCH_INI}
+    sed -i "s/{{ANALOG_PORT}}/${ANALOG_PORT}/g" ${DVSWITCH_INI}
+    sed -i "s/{{CALLSIGN}}/${CALLSIGN}/g" ${DVSWITCH_INI}
+    sed -i "s/{{MMDVM_PORT}}/${MMDVM_PORT}/g" ${DVSWITCH_INI}
 fi
 
 /MMDVM_Bridge ${MMDVM_INI}
