@@ -19,5 +19,6 @@ COPY ./run.sh /run.sh
 COPY --from=builder "/dist/md380-emu" /
 RUN apt-get update \
     && apt-get install -y qemu-user-static \
+    && chmod +x /run.sh \
     && apt-get clean
-CMD ["bash", "-c", "/run.sh"]
+CMD ["/run.sh"]
