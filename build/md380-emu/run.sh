@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 #
 #
+set -e
 
 EMULATOR_PORT=${EMULATOR_PORT:-2470}
-
-echo "Starting md380 emulator: $(date '+%Y%m%d %H:%M:%S')"
+# echo "Trying to start emulator on ${EMULATOR_PORT}"
 qemu-arm-static /md380-emu -S ${EMULATOR_PORT} -vv
