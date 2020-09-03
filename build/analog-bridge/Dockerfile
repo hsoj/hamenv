@@ -16,6 +16,7 @@ RUN apt-get update \
     && mv /src/${analog_name}/bin/${analog_name}.${platform} /${analog_name} \
     && mv /src/${mmdvm_name}/dvswitch.sh / \
     && mkdir -p /opt/${mmdvm_Name} \
+    && chmod +x /run.sh /dvswitch.sh \
     && apt-get purge -y ${tmp_pkgs} \
     && apt-get autoremove -y
-CMD ["bash", "-c", "/run.sh"]
+CMD ["bash", "/run.sh"]

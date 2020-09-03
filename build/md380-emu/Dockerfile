@@ -7,6 +7,7 @@ RUN apt-get update \
     && apt-get install -y ${tmp_pkgs} \
     && mkdir -p "${artifact}" \
     && git clone ${repo} /src \
+    && chmod +x /compile.sh \
     && /compile.sh
     # NOTE: The following cleanup should probably be removed just to expedite 
     # the build process

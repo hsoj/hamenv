@@ -12,7 +12,8 @@ RUN apt-get update \
     && mv /src/${repo_mmdvm}/bin/${repo_mmdvm}.${platform} /${repo_mmdvm} \
     && mkdir -p /opt/${repo_mmdvm} \
     && mv /src/${repo_mmdvm}/dvswitch.sh / \
+    && chmod +x /run.sh /dvswitch.sh \
     && apt-get purge -y ${tmp_pkgs} \
     && apt-get autoremove -y \
     && apt-get clean
-CMD ["bash", "-c", "/run.sh"]
+CMD ["bash", "/run.sh"]
