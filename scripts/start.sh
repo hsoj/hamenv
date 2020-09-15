@@ -89,16 +89,16 @@ emu_version=$(get_image_version ${EMULATOR_IMAGE})
 emu_op_name="${EMULATOR_IMAGE}_$(to_lower ${CALLSIGN})-${REPEATER_ID}"
 echo "!! NOTE !! Because the following needs to be started interactively, "
 echo "Make sure to hit ctrl+c once you see the emulator looping"
-docker run -it --name ${emu_op_name} \
+docker run -id --rm --name ${emu_op_name} \
     -p ${EMULATOR_PORT}:${EMULATOR_PORT}/udp \
     -e EMULATOR_PORT=${EMULATOR_PORT} \
     ${EMULATOR_IMAGE}:${emu_version}
-docker start ${emu_op_name}
+#docker start ${emu_op_name}
 
 # Start the MMDVM bridge
 mmdvm_version=$(get_image_version ${MMDVM_IMAGE})
 mmdvm_op_name="${MMDVM_IMAGE}_$(to_lower ${CALLSIGN})-${REPEATER_ID}"
-docker run -d --name ${mmdvm_op_name} \
+docker run -d --rm --name ${mmdvm_op_name} \
     -p ${MMDVM_PORT}:${MMDVM_PORT}/udp \
     -e CALLSIGN=${CALLSIGN} \
     -e DMR_ID=${DMR_ID} \
@@ -111,7 +111,7 @@ docker run -d --name ${mmdvm_op_name} \
 # Start the Analog bridge
 analog_version=$(get_image_version ${ANALOG_IMAGE})
 analog_op_name="${ANALOG_IMAGE}_$(to_lower ${CALLSIGN})-${REPEATER_ID}"
-docker run -d --name ${analog_op_name} \
+docker run -d --rm --name ${analog_op_name} \
     -p ${ANALOG_PORT}:${ANALOG_PORT}/udp \
     -p ${MOBILE_CLIENT_PORT}:${MOBILE_CLIENT_PORT}/udp \
     -e CALLSIGN=${CALLSIGN} \
