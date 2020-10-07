@@ -87,8 +87,6 @@ fi
 #  Start the emulator
 emu_version=$(get_image_version ${EMULATOR_IMAGE})
 emu_op_name="${EMULATOR_IMAGE}_$(to_lower ${CALLSIGN})-${REPEATER_ID}"
-echo "!! NOTE !! Because the following needs to be started interactively, "
-echo "Make sure to hit ctrl+c once you see the emulator looping"
 docker run -id --rm --name ${emu_op_name} \
     -p ${EMULATOR_PORT}:${EMULATOR_PORT}/udp \
     -e EMULATOR_PORT=${EMULATOR_PORT} \
