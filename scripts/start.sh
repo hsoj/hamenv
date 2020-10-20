@@ -96,7 +96,7 @@ docker run -id --rm --name ${emu_op_name} \
 # Start the MMDVM bridge
 mmdvm_version=$(get_image_version ${MMDVM_IMAGE})
 mmdvm_op_name="${MMDVM_IMAGE}_$(to_lower ${CALLSIGN})-${REPEATER_ID}"
-docker run -d --rm --name ${mmdvm_op_name} \
+docker run -d --name ${mmdvm_op_name} \
     -p ${MMDVM_PORT}:${MMDVM_PORT}/udp \
     -e CALLSIGN=${CALLSIGN} \
     -e DMR_ID=${DMR_ID} \
@@ -109,7 +109,7 @@ docker run -d --rm --name ${mmdvm_op_name} \
 # Start the Analog bridge
 analog_version=$(get_image_version ${ANALOG_IMAGE})
 analog_op_name="${ANALOG_IMAGE}_$(to_lower ${CALLSIGN})-${REPEATER_ID}"
-docker run -d --rm --name ${analog_op_name} \
+docker run -d --name ${analog_op_name} \
     -p ${ANALOG_PORT}:${ANALOG_PORT}/udp \
     -p ${MOBILE_CLIENT_PORT}:${MOBILE_CLIENT_PORT}/udp \
     -e CALLSIGN=${CALLSIGN} \
