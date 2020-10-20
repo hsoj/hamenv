@@ -11,19 +11,21 @@ DOCKER_BIN=${DOCKER_BIN:-$(which docker)}
 function get_containers() {
     local call=${1}
     local containers=$(${DOCKER_BIN} ps | grep -i ${call} | awk '{print $1}')
-    echo ${containers}
+    echo ${containers[@]}
 }
 
-if [ -z ${1} ]
+
+callsign=${1}
+if [ -z ${callsign} ]
 then
     echo "ERROR: Missing call sign argument"
     echo "Usage: ${0} [call sign]"
     exit 1
 fi
 
-callsign=${1}
-containers=$(get_containers ${1})
-if [ ! -z ${containers} ]
+containers=$(get_containers ${callsign})
+
+if [[ ${containers} != "" ]]
 then
     docker stop ${containers}
 fi
