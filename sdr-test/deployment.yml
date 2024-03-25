@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sdr-test
+  labels:
+    app: sdr-test
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sdr-test
+  template:
+    metadata:
+      labels:
+        app: sdr-test
+    spec:
+      nodeSelector:
+        kubernetes.io/os: linux
+        fleety.io/sdr: rtl
+      containers:
+        - name: sdr-test
+          image: robotastic/trunk-recorder:latest
+          securityContext:
+            privileged: true
+          volumeMounts:
+          - name: usb-bus
+            mountPath: /dev/bus/usb
+            readOnly: true
+          command: ["/bin/bash"]
+          args: ["-c", "sleep infinity"]
+      volumes:
+        - name: usb-bus
+          hostPath:
+            path: /dev/bus/usb

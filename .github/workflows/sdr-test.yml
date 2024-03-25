@@ -1,0 +1,26 @@
+name: SDR Test Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'sdr-test/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Lint Containerfile
+        uses: hadolint/hadolint-action@v2
+        with:
+          dockerfile: sdr-test/Containerfile
+      - name: Build Container Image
+        uses: docker/build-push-action@v2
+        with:
+          context: sdr-test
+          file: sdr-test/Containerfile
+          push: false
+          tags: my-container-image:latest

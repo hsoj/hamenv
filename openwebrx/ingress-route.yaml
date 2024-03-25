@@ -1,0 +1,23 @@
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: openwebrx-prefix
+spec:
+  replacePath:
+    path: /sdr
+---
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+metadata:
+  name: openwebrx
+spec:
+  entryPoints:
+    - http
+  routes:
+    - match: PathPrefix(`/sdr`)
+      kind: Rule
+      middlewares:
+        - name: openwebrx-prefix
+      services:
+        - name: openwebrx
+          port: 80

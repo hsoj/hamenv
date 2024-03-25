@@ -1,0 +1,11 @@
+# Use a base image with the desired Linux distribution
+FROM ubuntu:latest
+
+# Install dependencies
+RUN apt-get update && apt-get install -y \
+    rtl-sdr \
+    librtlsdr-dev \
+    libusb-1.0-0-dev \
+    libhackrf-dev \
+    libuhd-dev \
+    libboost-all-dev

@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: trunk-reporter
+  labels:
+    app: trunk-reporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: trunk-reporter
+  template:
+    metadata:
+      labels:
+        app: trunk-reporter
+    spec:
+      nodeSelector:
+        fleety.io/sdr: rtl
+      containers:
+        - name: trunk-reporter
+          image: robotastic/trunk-recorder:latest
+          volumeMounts:
+            - name: usb-devices
+              mountPath: /dev/bus/usb
+            - name: config-volume
+              mountPath: /app/
+            - name: recordings
+              mountPath: /recordings
+          securityContext:
+            privileged: true
+      volumes:
+        - name: usb-devices
+          hostPath:
+            path: /dev/bus/usb
+        - name: config-volume
+          configMap:
+            name: trunk-recorder-config
+        - name: recordings
+          persistentVolumeClaim:
+            claimName: trunk-recorder

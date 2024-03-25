@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openwebrx
+  labels:
+    app: openwebrx
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openwebrx
+  template:
+    metadata:
+      labels:
+        app: openwebrx
+    spec:
+      nodeSelector:
+        fleety.io/sdr: rtl
+      containers:
+        - name: openwebrx
+          image: jketterl/openwebrx:stable
+          imagePullPolicy: IfNotPresent
+          securityContext:
+            privileged: true
+          ports:
+            - name: http
+              containerPort: 8073
+          volumeMounts:
+            - name: usb-bus
+              mountPath: /dev/bus/usb
+            - name: tmp
+              mountPath: /tmp
+      volumes:
+        - name: usb-bus
+          hostPath:
+            path: /dev/bus/usb
+        - name: tmp
+          emptyDir:
+            medium: Memory
+            sizeLimit: 1Gi

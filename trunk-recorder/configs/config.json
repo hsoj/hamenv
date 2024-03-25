@@ -1,0 +1,27 @@
+{
+    "ver": 2,
+    "defaultMode": "digital",
+    "frequencyFormat": "mhz",
+    "captureDir": "/recordings",
+    "sources": [{
+        "driver": "osmosdr",
+        "device": "rtl=00000001",
+        "digitalRecorders": 4,
+        "center": 850000000,
+        "error": 1000,
+        "gain": 39,
+        "rate": 2048000
+    }],
+    "systems": [{
+        "callLog": true,
+        "hideEncrypted": false,
+        "hideUnknownTalkgroups": false,
+        "recordUnkown": false,
+        "shortName": "nebula",
+        "squelch": -50,
+        "type": "p25",
+        "modulation": "qpsk",
+        "talkgroupsFile": "/app/talkgroups.csv",
+        "control_channels": [851300000]
+    }]
+}
