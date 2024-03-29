@@ -1,0 +1,32 @@
+name: GUI Container Workflow
+
+on:
+  push:
+    paths:
+        - './xorg/container/**'
+
+env:
+  CONTAINER_CONTEXT: "./xorg/container/"
+  CONTAINER_FILE: Containerfile
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Lint Containerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        with:
+          dockerfile: ${{ env.CONTAINER_CONTEXT }}/${{ env.CONTAINER_FILE }}
+          format: json
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build Container Image
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ env.CONTAINER_CONTEXT }}
+          file: ${{ env.CONTAINER_CONTEXT }}/${{ env.CONTAINER_FILE }}
+          push: true
+          tags: ghcr.io/hsoj/hamenv-xorg:${{ github.sha }}

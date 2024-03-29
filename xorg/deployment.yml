@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gui
+  labels:
+    app: gui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gui
+  template:
+    metadata:
+      labels:
+        app: gui
+    spec:
+      containers:
+        - name: xorg
+          image: ubuntu:latest
+          command: ["sleep", "infinity"]
+          securityContext:
+            privileged: true
