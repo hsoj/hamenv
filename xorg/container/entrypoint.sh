@@ -8,11 +8,4 @@ fi
 
 # Start Xorg server
 Xorg -listen tcp -noreset +extension RANDR +extension RENDER \
-    -config /etc/X11/xorg.conf $DISPLAY &
-
-# Run your application or command here
-# For example:
-# exec my_application
-
-# Wait for Xorg server to exit
-wait
+    -config /etc/X11/xorg.conf $DISPLAY
