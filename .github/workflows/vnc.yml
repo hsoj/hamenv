@@ -1,0 +1,14 @@
+name: Build and publish the VNC container
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'vnc/**'
+jobs:
+  build-and-publish:
+    name: Build and publish the VNC container
+    uses: ./.github/workflows/container.yml
+    with:
+      image: vnc
+      context: vnc

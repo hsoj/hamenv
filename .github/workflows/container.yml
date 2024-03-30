@@ -1,0 +1,46 @@
+name: Build and publish container image
+on:
+  workflow_call:
+    inputs:
+      context:
+        description: 'The context to use for the build'
+        default: "."
+        type: string
+      containerfile: 
+        description: 'Path to the Containerfile'
+        type: string
+        default: 'Containerfile'
+      image:
+        description: 'The name of the image to build'
+        type: string
+        required: true
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Lint Containerfile
+        uses: hadolint/hadolint-action@v3.1.0
+        id: hadolint
+        with:
+          dockerfile: ${{ inputs.context }}/${{ inputs.containerfile }}
+          format: json
+          no-fail: true
+      - name: Append job summary with lint results
+        if: steps.hadolint.outputs.lint-results != '[]'
+        run: echo "## Hadolint Results${steps.hadolint.outputs.lint-results}" >> $GITHUB_SUMMARY
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build and push container image
+        uses: docker/build-push-action@v5
+        with:
+          context: ${{ inputs.context }}
+          file: ${{ inputs.context }}/${{ inputs.containerfile }}
+          push: true
+          tags: ghcr.io/${{ github.repository_owner }}/${{ github.repository }}/${{ inputs.image }}:latest
+      
