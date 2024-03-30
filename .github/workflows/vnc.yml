@@ -5,6 +5,7 @@ on:
       - main
     paths:
       - 'vnc/**'
+      - '.github/workflows/vnc.yml'
 jobs:
   build-and-publish:
     name: Build and publish the VNC container
