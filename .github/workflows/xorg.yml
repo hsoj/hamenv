@@ -3,7 +3,8 @@ name: GUI Container Workflow
 on:
   push:
     paths:
-        - './xorg/container/**'
+        - .github/workflows/xorg.yml
+        - 'xorg/container/**'
 
 env:
   CONTAINER_CONTEXT: "./xorg/container/"
