@@ -14,6 +14,10 @@ on:
         description: 'The name of the image to build'
         type: string
         required: true
+      tag:
+        default: 'latest'
+        description: 'The tag to apply to the image'
+        type: string
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -26,7 +30,6 @@ jobs:
         with:
           dockerfile: ${{ inputs.context }}/${{ inputs.containerfile }}
           format: json
-          no-fail: true
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
@@ -39,5 +42,5 @@ jobs:
           context: ${{ inputs.context }}
           file: ${{ inputs.context }}/${{ inputs.containerfile }}
           push: true
-          tags: ghcr.io/${{ github.repository }}/${{ inputs.image }}:latest
+          tags: ghcr.io/${{ github.repository }}/${{ inputs.image }}:${{ inputs.tag }}
       

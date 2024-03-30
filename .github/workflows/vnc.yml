@@ -13,3 +13,4 @@ jobs:
     with:
       image: vnc
       context: vnc
+      tag: "1"
