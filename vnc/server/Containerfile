@@ -3,9 +3,11 @@ ENV DEBIAN_FRONTEND=noninteractive
 COPY --chmod=0755 entrypoint.sh /entrypoint.sh
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        curl \
+        curl=7.81.0-1ubuntu1.16 \
         tigervnc-standalone-server=1.12.0+dfsg-4ubuntu0.22.04.1 \
         tigervnc-xorg-extension=1.12.0+dfsg-4ubuntu0.22.04.1 \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+# Slice for websockify
+RUN curl -# -L https://github.com/novnc/websockify/archive/refs/tags/v0.11.0.tar.gz | tar -xz --strip 1 -C /websockify
 ENTRYPOINT [ "/entrypoint.sh" ]
