@@ -13,7 +13,9 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -31,4 +33,4 @@ jobs:
           context: ${{ env.CONTAINER_CONTEXT }}
           file: ${{ env.CONTAINER_CONTEXT }}/${{ env.CONTAINER_FILE }}
           push: true
-          tags: ghcr.io/hsoj/hamenv-xorg:${{ github.sha }}
+          tags: ghcr.io/hsoj/hamenv:xorg-${{ github.sha }}
