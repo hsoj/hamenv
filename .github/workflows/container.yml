@@ -29,7 +29,11 @@ jobs:
           no-fail: true
       - name: Append job summary with lint results
         if: steps.hadolint.outputs.lint-results != '[]'
-        run: echo "## Hadolint Results${steps.hadolint.outputs.lint-results}" >> $GITHUB_SUMMARY
+        run: |
+          echo "## Hadolint Results" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "${{ steps.hadolint.outputs.lint-results }}" >> $GITHUB_STEP_SUMMARY
+          echo "---" >> $GITHUB_STEP_SUMMARY
       - name: Login to GitHub Container Registry
         uses: docker/login-action@v3
         with:
