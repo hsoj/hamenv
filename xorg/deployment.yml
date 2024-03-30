@@ -16,7 +16,6 @@ spec:
     spec:
       containers:
         - name: xorg
-          image: ubuntu:latest
-          command: ["sleep", "infinity"]
+          image: ghcr.io/hsoj/hamenv:xorg-76ef954c5548d5109a38c8c22fdf243796a3d9b3          
           securityContext:
             privileged: true

@@ -39,4 +39,4 @@ jobs:
           context: ${{ env.CONTAINER_CONTEXT }}
           file: ${{ env.CONTAINER_CONTEXT }}/${{ env.CONTAINER_FILE }}
           push: true
-          tags: ghcr.io/hsoj/hamenv:xorg-${{ github.sha }}
+          tags: ghcr.io/hsoj/hamenv:xorg-${{ github.run_id }}
