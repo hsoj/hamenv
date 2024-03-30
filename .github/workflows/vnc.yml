@@ -7,10 +7,17 @@ on:
       - 'vnc/**'
       - '.github/workflows/vnc.yml'
 jobs:
-  build-and-publish:
-    name: Build and publish the VNC container
+  vnc-server:
+    name: Build and publish the VNC server container
     uses: ./.github/workflows/container.yml
     with:
-      image: vnc
-      context: vnc
+      image: vnc-server
+      context: vnc/server
+      tag: "1"
+  vnc-web:
+    name: Build and publish the VNC web container
+    uses: ./.github/workflows/container.yml
+    with:
+      image: vnc-web
+      context: vnc/web
       tag: "1"
