@@ -10,5 +10,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && mkdir /noVNC \
-    && curl -# -L ${NOVNC_URL} | tar -xz --strip 1 -C /noVNC
+    && curl -# -L ${NOVNC_URL} -o /noVNC.tar.gz \
+    && tar -xz --strip 1 -C /noVNC -f /noVNC.tar.gz \
+    && rm /noVNC.tar.gz
 ENTRYPOINT [ "/entrypoint.sh" ]
