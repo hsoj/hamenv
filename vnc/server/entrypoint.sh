@@ -3,4 +3,4 @@
 
 DISPLAY=${DISPLAY:-:1}
 
-tigervncserver -localhost yes -SecurityTypes None -xstartup /usr/bin/xterm $DISPLAY
+tigervncserver -fg -localhost yes -SecurityTypes None -xstartup /usr/bin/startxfce4 -geometry 1024x768 $DISPLAY
