@@ -3,4 +3,4 @@
 
 DISPLAY=${DISPLAY:-:1}
 
-Xvnc -UseIPv6=0 -SecurityTypes=None $DISPLAY
+tigervncserver -localhost yes -SecurityTypes None -xstartup /usr/bin/startxfce4 $DISPLAY
