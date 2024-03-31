@@ -3,4 +3,4 @@
 
 DISPLAY=${DISPLAY:-:1}
 
-Xvnc -UseIPv6=0 $DISPLAY
+Xvnc -UseIPv6=0 -SecurityTypes=None $DISPLAY
