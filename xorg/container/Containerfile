@@ -3,7 +3,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 COPY xorg.conf /etc/X11/xorg.conf
 COPY entrypoint.sh /entrypoint.sh
 RUN apt-get update \
-    && apt-get install -y xserver-xorg-video-dummy \
+    && apt-get install -y xserver-xorg-video-dummy chromium \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/* \
     && chmod +x /entrypoint.sh

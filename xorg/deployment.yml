@@ -16,6 +16,10 @@ spec:
     spec:
       containers:
         - name: xorg
-          image: ghcr.io/hsoj/hamenv:xorg-76ef954c5548d5109a38c8c22fdf243796a3d9b3          
+          image: ghcr.io/hsoj/hamenv:xorg-8491945723
+          command: ["sleep", "infinity"]
           securityContext:
             privileged: true
+          env:
+            - name: DISPLAY
+              value: :1
